@@ -8,14 +8,14 @@ can also help guiding the AI-assistant so that useful results come out.
 This is a research project that serves exploring how we humans need to interact with AI-assistants to get reliable and trustworthy results. 
 It may be changed or shut down at any time.
 
-**Note:** Your images and the text you enter here may be sent to [OpenAI](https://openai.com/)'s online serivce where we use a large language model to answer your request. 
-Do not upload any data you cannot share openly. Also do not enter any private or secret information. By submitting this github issue, you confirm that you understand these conditions.
+**Note:** Your images and the text you enter here may be sent to [OpenAI](https://openai.com/)'s online service where we use a large language model to answer your request. 
+Do not upload any data you cannot share openly. Also, do not enter any private or secret information. By submitting this GitHub issue, you confirm that you understand these conditions.
 
 [Submit your image and your request here](https://github.com/haesleinhuepf/git-bob-bioimage-analysis-example/issues/new?assignees=haesleinhuepf&labels=image-analysis&projects=&template=bioimage_analysis.md&title=%5BAnalysis+Request%5D%3A+)
 
 ## Example
 
-As an example, you can look at [this github issue](): I uploaded an image 
+As an example, you can look at [this GitHub issue](): I uploaded an image 
 
 ![img.png](docs/img.png)
 
@@ -28,7 +28,7 @@ There, we could download the [notebook](https://github.com/haesleinhuepf/git-bob
 
 ![img_2.png](docs/img_2.png)
 
-It is cerainly not perfect, but [git-bob](https://github.com/haesleinhuepf/git-bob) allows us to explore possibilities. 
+It is certainly not perfect, but [git-bob](https://github.com/haesleinhuepf/git-bob) allows us to explore possibilities. 
 Plus: Our conversations with the AI-assistant are conserved and others can learn from them how to prompt for bio-image analysis code!
 
 ## Feedback welcome
