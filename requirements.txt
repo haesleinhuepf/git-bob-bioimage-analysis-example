@@ -1,0 +1,8 @@
+Pillow
+numpy
+scikit-image
+stackview
+pandas
+seaborn
+matplotlib
+scipy
