@@ -16,8 +16,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout main branch
+      if: ${{ github.event.issue.pull_request == null }}  # Only run if it's NOT a PR comment
+      uses: actions/checkout@v3
+
+    - name: Checkout PR head branch
+      if: ${{ github.event.issue.pull_request != null }}  # Only run if it's a PR comment
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}  # Checkout the PR head branch
+
+    - name: Display the current branch
+      run: git branch
 
     - name: Print pull request number
       run: |  
