@@ -8,3 +8,4 @@ matplotlib
 scipy
 pyclesperanto
 pyclesperanto-prototype
+napari-segment-blobs-and-things-with-membranes
