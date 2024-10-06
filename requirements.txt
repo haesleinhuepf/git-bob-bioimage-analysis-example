@@ -7,3 +7,4 @@ seaborn
 matplotlib
 scipy
 pyclesperanto
+pyclesperanto-prototype
