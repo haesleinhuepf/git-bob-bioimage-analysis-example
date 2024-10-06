@@ -236,7 +236,66 @@ jobs:
           
           * Label objects in isotropic greyvalue images by applying Gaussian blurs, spot detection, Otsu thresholding, and Voronoi labeling with parameters for segmentation precision and cell proximity control.
           cle.voronoi_otsu_labeling(input_image: ndarray, spot_sigma: float = 2, outline_sigma: float = 2) -> ndarray
-    
+
+          ### Processing images using napari-segment-blobs-and-things-with-membranes
+
+          If you use this plugin, you need to import it like this: `import napari_segment_blobs_and_things_with_membranes as nsbatwm`. 
+          You can then use it for various purposes:
+
+          * Denoise an image using a Gaussian filter
+          nsbatwm.gaussian_blur(image, sigma=1)
+
+          * Denoise an image, while preserving edges:
+          nsbatwm.median_filter(image, radius=2)
+
+          * Denoise an image using a percentile (similar to median, but free in choosing the percentile)
+          nsbatwm.percentile_filter(image, percentile=50, radius=2)
+
+          * Determine the local minimum intensity for every pixel (also works with maximum)
+          nsbatwm.minimum_filter(image, radius=2)
+
+          * Enhance edges
+          nsbatwm.gaussian_laplace(image, sigma=2)
+
+          * Remove background from an image using the Top-Hat filter
+          nsbatwm.white_tophat(image, radius=2)
+
+          * Remove background from an image using the Rolling-Ball method
+          nsbatwm.subtract_background(membranes, rolling_ball_radius=15)
+
+          * Uses combination of Voronoi tesselation and Otsu's threshold method for segmenting an image
+          nsbatwm.voronoi_otsu_labeling(blobs, spot_sigma=3.5, outline_sigma=1)
+
+          * Apply a Gaussian blur, Otsu's threshold for binarization and returns a label image
+          nsbatwm.gauss_otsu_labeling(blobs, outline_sigma=1)
+
+          * Binarize an image using a threshold determined using Otsu's method (also works with li, triangle, yen, mean methods)
+          nsbatwm.threshold_otsu(blobs)
+
+          * Split touching objects in a binary image
+          nsbatwm.split_touching_objects(binary) * 1
+
+          * Identify individual objects in a binary image using Connected Component labeling
+          nsbatwm.connected_component_labeling(binary)
+
+          * Apply a Watershed algorithm to an an image showing membrane-like structures and a label image that serves as seeds for the watershed
+          nsbatwm.seeded_watershed(membranes_image, labeled_seeds)
+
+          * Apply a Watershed algorithm to an an image showing membrane-like structures. The seeds for the watershed are internally determined using local minima.
+          nsbatwm.local_minima_seeded_watershed(membrane_image, spot_sigma=10)
+
+          * Dilate labels to increase their size 
+          nsbatwm.expand_labels(label_image: "napari.types.LabelsData", distance=1)
+
+          * Smooths outlines of label images by determining the most popular label locally
+          nsbatwm.mode_filter(label_image, radius=10)
+
+          * Remove labels that touch the image border
+          nsbatwm.remove_labels_on_edges(label_image)
+
+          * Skeletonize labels
+          nsbatwm.skeletonize(labels)
+
           
           ### Working with Pandas DataFrames
       
