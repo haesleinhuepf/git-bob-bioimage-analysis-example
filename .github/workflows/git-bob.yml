@@ -64,6 +64,11 @@ jobs:
       run: |
         mamba install -y pocl
 
+    - name: Install OpenCL ICD loader
+      id: install-ocl-icd
+      run: |
+        mamba install -c conda-forge ocl-icd-system
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
