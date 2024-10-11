@@ -134,109 +134,69 @@ jobs:
           from pathlib import Path
           image = czifile.imread(Path(filename))
           ```
-          
-          ### pyclesperanto for GPU-accelerated image processing
-          pyclesperanto is a Python library for GPU-accelerated image processing and analysis. 
-          To use it, you need to import it:
-          ```
-          import pyclesperanto as cle
-          ```
-          IMPORTANT: Import pyclesperanto and NOT pyclesperanto_prototype !
-          If you are asked to perform a specific task, you can use the following code snippets:
-          
-          * Identify and highlight edge pixels of binary objects, setting them to 1 in the output image on a specified device.
-          cle.binary_edge_detection(input_image: ndarray) -> ndarray
-          
-          * Perform a morphological closing operation on a label image using an octagonal structuring element with optional radius and device specifications.
-          cle.closing_labels(input_image: ndarray, radius: int = 0) -> ndarray
-          
-          * Combine two label images by overwriting and sequentially relabeling, allowing specification of input images, output image, and device.
-          cle.combine_labels(input_image0: ndarray, input_image1: ndarray) -> ndarray
-          
-          * Generate a label map by performing connected components analysis on a binary image, considering either 'box' or 'sphere' pixel neighborhoods, with optional output image and device specification.
-          cle.connected_component_labeling(input_image: ndarray, connectivity: str = 'box') -> ndarray
-          
-          * Perform a Difference of Gaussian operation on a 3D image by applying two Gaussian blurs with specified sigmas and subtracting the results, suitable for 32-bit Float images.
-          cle.difference_of_gaussian(input_image: ndarray, sigma1_x: float = 2, sigma1_y: float = 2, sigma1_z: float = 2, sigma2_x: float = 2, sigma2_y: float = 2, sigma2_z: float = 2) -> ndarray
-          
-          * Enlarge labels in an isotropic input image without overlap, optionally specifying output image, dilation radius, and device.
-          cle.dilate_labels(input_image: ndarray, radius: int = 2) -> ndarray
-          
-          * apply Gaussian blur to an image, divide the original by the result, and optionally choose sigma values and device settings
-          cle.divide_by_gaussian_background(input_image: ndarray, sigma_x: float = 2, sigma_y: float = 2, sigma_z: float = 2) -> ndarray
-          
-          * segment and label an image using blurring, thresholding, erosion, and masked Voronoi-labeling, suitable for dense objects but may remove small objects.
-          cle.eroded_otsu_labeling(input_image: ndarray, number_of_erosions: int = 5, outline_sigma: float = 2) -> ndarray
-          
-          * Filter out labels in an image that exceed a specified maximum size.
-          cle.exclude_small_labels(input_image: ndarray, max_size: float = 100) -> ndarray
-          
-          * Label objects in grey-value images using Gaussian blur, Otsu-thresholding, and connected component labeling, with adjustable segmentation via outline_sigma.
-          cle.gauss_otsu_labeling(input_image0: ndarray, outline_sigma: float = 0) -> ndarray
-          
-          * Apply a Gaussian blur to an image with specified sigma values for the X, Y, and Z axes, allowing for non-isotropic filtering and skipping blur in any direction with a zero sigma.
-          cle.gaussian_blur(input_image: ndarray, sigma_x: float = 0, sigma_y: float = 0, sigma_z: float = 0) -> ndarray
-          
-          * Apply the Laplace operator using 'box' or 'sphere' connectivity to process an input image, optionally specifying an output image and device.
-          cle.laplace(input_image: ndarray, connectivity: str = 'box') -> ndarray
-          
-          * Calculate and store the mean squared error (MSE) between two images in the ImageJs Results table.
-          cle.mean_squared_error(input_image0: ndarray, input_image1: ndarray) -> float
-          
-          * compute the local mode of a pixel's neighborhood in an image with specified radius and shape, using values from 0 to 255.
-          cle.mode(input_image: ndarray, radius_x: int = 1, radius_y: int = 1, radius_z: int = 1, connectivity: str = 'box') -> ndarray
-          
-          * Perform a morphological opening on a label image using an octagonal structuring element, with optional output image and device specification.
-          cle.opening_labels(input_image: ndarray, radius: int = 0) -> ndarray
-          
-          * Reduce a label map to its centroids in an optional output image using a specified device.
-          cle.reduce_labels_to_centroids(input_image: ndarray) -> ndarray
-          
-          * Extracts label edges from a label map, preserving label IDs and setting the background to zero, with optional device specification for processing.
-          cle.reduce_labels_to_label_edges(input_image: ndarray) -> ndarray
-          
-          * Renumber labels in an image to eliminate gaps, ensuring the number of labels equals the maximum label index, primarily processed on the CPU.
-          cle.relabel_sequential(input_image: ndarray, blocksize: int = 4096) -> ndarray
-          
-          * Remove labels from the edges of an image and renumber remaining elements, with options to exclude specific axes and specify a device for operation.
-          cle.remove_labels_on_edges(input_image: ndarray, exclude_x: bool = True, exclude_y: bool = True, exclude_z: bool = True) -> ndarray
-          
-          * Filter out objects larger than a specified size from a label map image.
-          cle.remove_large_labels(input_image: ndarray, max_size: float = 100) -> ndarray
-          
-          * Remove labelled objects smaller than a specified pixel size from a label map image, with optional output image specification and device selection.
-          cle.remove_small_labels(input_image: ndarray, min_size: float = 100) -> ndarray
-          
-          * Replace pixel intensities in an image using a vector where the index corresponds to old intensities and the value to new ones, with optional output image and device specification.
-          cle.replace_values(input_image0: ndarray, input_image1: ndarray) -> ndarray
-          
-          * Translate and rotate an image by specified vectors and angles (in degrees) optionally with interpolation and resizing, supporting operation on specified devices.
-          cle.rigid_transform(input_image: ndarray, translate_x: float = 0, translate_y: float = 0, translate_z: float = 0, angle_x: float = 0, angle_y: float = 0, angle_z: float = 0, centered: bool = True, interpolate: bool = False, resize: bool = False) -> ndarray
-          
-          * Perform a morphological opening on a label image, fill gaps using Voronoi labeling, and retain the background, suitable for isotropic images.
-          cle.smooth_labels(input_image: ndarray, radius: int = 0) -> ndarray
-          
-          * Apply the Sobel kernel to an input image for edge detection with optional device specification and output.
-          cle.sobel(input_image: ndarray) -> ndarray
-          
-          * Calculate the squared pixel-by-pixel difference between two images, optionally specifying an output image and a device for processing.
-          cle.squared_difference(input_image0: ndarray, input_image1: ndarray) -> ndarray
-          
-          * Calculate the local standard deviation of an image's pixel neighborhood with specified radii and optional output image, using either a box or sphere connectivity shape.
-          cle.standard_deviation(input_image: ndarray, radius_x: int = 1, radius_y: int = 1, radius_z: int = 1, connectivity: str = 'box') -> ndarray
-          
-          * Subtracts a Gaussian-blurred version of an image from the original, with configurable blur radii and optional output image and device specification.
-          cle.subtract_gaussian_background(input_image: ndarray, sigma_x: float = 2, sigma_y: float = 2, sigma_z: float = 2) -> ndarray
-          
-          * Convert an image to binary using Otsu's thresholding via a GPU-accelerated histogram.
-          cle.threshold_otsu(input_image: ndarray) -> ndarray
-          
-          * perform background subtraction on an image using a tophat filter with customizable radii and connectivity options
-          cle.top_hat(input_image: ndarray, radius_x: float = 1, radius_y: float = 1, radius_z: float = 1, connectivity: str = 'box') -> ndarray
-          
-          * Label objects in isotropic greyvalue images by applying Gaussian blurs, spot detection, Otsu thresholding, and Voronoi labeling with parameters for segmentation precision and cell proximity control.
-          cle.voronoi_otsu_labeling(input_image: ndarray, spot_sigma: float = 2, outline_sigma: float = 2) -> ndarray
 
+          ### Processing images using the napari-simpleitk-image-processing (nsitk) Python library. 
+          
+          When you use nsitk, you always start by importing the library: `import napari_simpleitk_image_processing as nsitk`.
+          When asked for specific tasks, you can adapt one of the following code snippets:
+          
+          * Apply a median filter to an image to remove noise while preserving edges.
+            nsitk.median_filter(image, radius=5)
+          
+          * Apply a Gaussian blur to smooth the image.
+            nsitk.gaussian_blur(image, sigma=1.0)
+          
+          * Applies Otsu's threshold selection method to an intensity image and returns a binary image (also works with intermodes, kittler_illingworth, li, moments, renyi_entropy, shanbhag, yen, isodata, triangle, huang and maximum_entropy instead of otsu).
+            nsitk.threshold_otsu(image)
+          
+          * Computes the signed Maurer distance map of the input image.
+            nsitk.signed_maurer_distance_map(binary_image)
+          
+          * Detects edges in the image using Canny edge detection.
+            nsitk.canny_edge_detection(image, variance=1.0)
+          
+          * Computes the gradient magnitude of an image.
+            nsitk.gradient_magnitude(image)
+          
+          * Identifies the regional maxima of an image.
+            nsitk.regional_maxima(image)
+          
+          * Rescales the intensity of an input image to a specified range.
+            nsitk.rescale_intensity(image, output_min=0, output_max=255)
+          
+          * Applies the Sobel operator to an image to find edges.
+            nsitk.sobel(image)
+          
+          * Enhances the contrast of an image using adaptive histogram equalization.
+            nsitk.adaptive_histogram_equalization(image)
+          
+          * Applies a standard deviation filter to an image.
+            nsitk.standard_deviation_filter(image)
+          
+          * Labels the connected components in a binary image.
+            nsitk.connected_component_labeling(binary_image)
+          
+          * Labels objects in a binary image and can split object that are touching..
+            nsitk.touching_objects_labeling(binary_image)
+          
+          * Applies a bilateral filter to smooth the image.
+            nsitk.bilateral_filter(image, domainSigma=2.0, rangeSigma=50.0)
+          
+          * Applies the Laplacian of Gaussian filter to find edges in an image.
+            nsitk.laplacian_of_gaussian_filter(image, sigma=1.0)
+          
+          * Identifies h-maxima of an image, suppressing maxima smaller than h.
+            nsitk.h_maxima(image, h=10)
+          
+          * Removes background in an image using the Top-Hat filter.
+            nsitk.white_top_hat(image, radius=5)
+
+          * Computes basic statistics for labeled object regions in an image.
+            nsitk.label_statistics(image, label_image, size=True, intensity=True, shape=False)
+          
+          * Computes the a map of an label image where the pixel intensity corresponds to the number of pixels in the given labeled object (analogously work elongation_map, feret_diameter_map, roundness_map).
+            nsitk.pixel_count_map(label_image)
+          
           ### Processing images using napari-segment-blobs-and-things-with-membranes
 
           If you use this plugin, you need to import it like this: `import napari_segment_blobs_and_things_with_membranes as nsbatwm`. 
@@ -296,13 +256,11 @@ jobs:
           * Skeletonize labels
           nsbatwm.skeletonize(labels)
 
-          
           ### Working with Pandas DataFrames
       
           In case a pandas DataFrame, e.g. `df` is the result of a code block, just write `df.head()`
           by the end so that the user can see the intermediate result.
           
-      
           ### Processing images with scikit-image
           
           * Load an image file from disc and store it in a variable:
@@ -323,12 +281,6 @@ jobs:
           measurements = regionprops_table(label_image, intensity_image=image, properties=properties)
           df = pd.DataFrame(measurements)
           ```
-          
-    
-          
-          
-          
-          
           
           When asked to solve a specific problem, you keep your code changes minimal and only solve the problem at hand.
           You cannot retrieve information from other sources but from github.com.
