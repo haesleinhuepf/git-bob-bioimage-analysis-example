@@ -18,6 +18,8 @@ assignees: haesleinhuepf
 - Are you using any specific Python libraries for the analysis? If not, we'll may use:
   - numpy
   - scikit-image
+  - napari-simpleitk-image-processing
+  - napari-segment-blobs-and-things-with-membranes
   - stackview
   - pandas
   - seaborn
