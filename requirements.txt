@@ -6,6 +6,5 @@ pandas
 seaborn
 matplotlib
 scipy
-pyclesperanto
-pyclesperanto-prototype
 napari-segment-blobs-and-things-with-membranes
+napari-simpleitk-image-processing
