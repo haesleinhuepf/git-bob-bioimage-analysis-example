@@ -125,7 +125,7 @@ jobs:
           When asked for specific tasks, you can adapt one of the following code snippets:
           
           * Apply a median filter to an image to remove noise while preserving edges.
-            nsitk.median_filter(image, radius=5)
+            nsitk.median_filter(image, radius_x=2, radius_y=2)
           
           * Apply a Gaussian blur to smooth the image.
             nsitk.gaussian_blur(image, variance_x=1.0, variance_x=1.0)
@@ -137,25 +137,22 @@ jobs:
             nsitk.signed_maurer_distance_map(binary_image)
           
           * Detects edges in the image using Canny edge detection.
-            nsitk.canny_edge_detection(image, variance=1.0)
-          
-          * Computes the gradient magnitude of an image.
-            nsitk.gradient_magnitude(image)
+            nsitk.canny_edge_detection(image, lower_threshold=0, upper_threshold=50)
           
           * Identifies the regional maxima of an image.
             nsitk.regional_maxima(image)
           
           * Rescales the intensity of an input image to a specified range.
-            nsitk.rescale_intensity(image, output_min=0, output_max=255)
+            nsitk.rescale_intensity(image, output_minimum=0, output_maximum=255)
           
           * Applies the Sobel operator to an image to find edges.
             nsitk.sobel(image)
           
           * Enhances the contrast of an image using adaptive histogram equalization.
-            nsitk.adaptive_histogram_equalization(image)
+            nsitk.adaptive_histogram_equalization(image, alpha=0.3, beta=0.3, radius_x=5, radius_y=5)
           
           * Applies a standard deviation filter to an image.
-            nsitk.standard_deviation_filter(image)
+            nsitk.standard_deviation_filter(image, radius_x=5, radius_y=5)
           
           * Labels the connected components in a binary image.
             nsitk.connected_component_labeling(binary_image)
@@ -164,16 +161,16 @@ jobs:
             nsitk.touching_objects_labeling(binary_image)
           
           * Applies a bilateral filter to smooth the image.
-            nsitk.bilateral_filter(image, domainSigma=2.0, rangeSigma=50.0)
+            nsitk.bilateral_filter(image, radius=10.0)
           
           * Applies the Laplacian of Gaussian filter to find edges in an image.
             nsitk.laplacian_of_gaussian_filter(image, sigma=1.0)
           
           * Identifies h-maxima of an image, suppressing maxima smaller than h.
-            nsitk.h_maxima(image, h=10)
+            nsitk.h_maxima(image, height=10)
           
           * Removes background in an image using the Top-Hat filter.
-            nsitk.white_top_hat(image, radius=5)
+            nsitk.white_top_hat(image, radius_x=5, radius_y=5)
 
           * Computes basic statistics for labeled object regions in an image.
             nsitk.label_statistics(image, label_image, size=True, intensity=True, shape=False)
@@ -217,7 +214,7 @@ jobs:
           nsbatwm.threshold_otsu(blobs)
 
           * Split touching objects in a binary image
-          nsbatwm.split_touching_objects(binary) * 1
+          nsbatwm.split_touching_objects(binary, sigma=3.5) * 1
 
           * Identify individual objects in a binary image using Connected Component labeling
           nsbatwm.connected_component_labeling(binary)
@@ -226,10 +223,10 @@ jobs:
           nsbatwm.seeded_watershed(membranes_image, labeled_seeds)
 
           * Apply a Watershed algorithm to an an image showing membrane-like structures. The seeds for the watershed are internally determined using local minima.
-          nsbatwm.local_minima_seeded_watershed(membrane_image, spot_sigma=10)
+          nsbatwm.local_minima_seeded_watershed(membrane_image, spot_sigma=10, outline_sigma=0)
 
           * Dilate labels to increase their size 
-          nsbatwm.expand_labels(label_image: "napari.types.LabelsData", distance=1)
+          nsbatwm.expand_labels(label_image, distance=1)
 
           * Smooths outlines of label images by determining the most popular label locally
           nsbatwm.mode_filter(label_image, radius=10)
