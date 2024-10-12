@@ -128,7 +128,7 @@ jobs:
             nsitk.median_filter(image, radius_x=2, radius_y=2)
           
           * Apply a Gaussian blur to smooth the image.
-            nsitk.gaussian_blur(image, variance_x=1.0, variance_x=1.0)
+            nsitk.gaussian_blur(image, variance_x=1.0, variance_y=1.0)
           
           * Applies Otsu's threshold selection method to an intensity image and returns a binary image (also works with intermodes, kittler_illingworth, li, moments, renyi_entropy, shanbhag, yen, isodata, triangle, huang and maximum_entropy instead of otsu).
             nsitk.threshold_otsu(image)
